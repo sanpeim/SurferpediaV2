@@ -1,0 +1,52 @@
+body {
+
+}
+
+.header {
+  background: url('../images/surf-head.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+}
+
+.kalani-pic {
+  background: url('../images/kd.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.moore-pic {
+  background: url('../images/cm2.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.jake-pic {
+  background: url('../images/jm.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.souza-pic {
+  background: url('../images/souza.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.kolohe-pic {
+  background: url('../images/KoloheAndino_02.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.keliamoniz {
+  background: url("../images/KeliaMoniz.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+}
