@@ -1,4 +1,4 @@
-@(page: String)(content: Html)
+@(surfers: List[Surfer])(content: Html)
 
 <!DOCTYPE html>
 
@@ -37,22 +37,34 @@
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Males <b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
-            <li><a href="@routes.Application.kalanid()">Kalani David</a></li>
+            @for(surfer <- surfers) {
+              @if(surfer.getSurferType() == "Male") {
+              <li><a href="/surfer/@surfer.getSlug()">@surfer.getName()</a></li>
+              }
+            }
             </ul>
           </li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Females <b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
-            <li><a href="@routes.Application.cmoore()">Clarissa Moore</a></li>    
+            @for(surfer <- surfers) {
+              @if(surfer.getSurferType() == "Female") {
+              <li><a href="/surfer/@surfer.getSlug()">@surfer.getName()</a></li>
+              }
+            }   
             </ul>
           </li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Groms <b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
-            <li><a href="@routes.Application.jakem()">Jake Marshall</a></li>
+            @for(surfer <- surfers) {
+              @if(surfer.getSurferType() == "Grom") {
+              <li><a href="/surfer/@surfer.getSlug()">@surfer.getName()</a></li>
+              }
+            }
             </ul>
           </li>
-          
+          <li><a href="@routes.Application.newSurfer()">New</a></li>
           </ul>
       </div>
     </div>

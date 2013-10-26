@@ -7,8 +7,6 @@ package models;
  */
 public class Surfer {
 
-  /** the id field. */
-  private long id;
   /** the name field. */
   private String name;
   /** the home field. */
@@ -25,10 +23,11 @@ public class Surfer {
   private String slug;
   /** the type field. */
   private String surferType;
+  /** checks if created. */
+  private boolean checker = true;
   
   /**
-   * 
-   * @param id id.
+   * Creates a surfer.
    * @param name name.
    * @param home home.
    * @param awards awards.
@@ -38,31 +37,16 @@ public class Surfer {
    * @param slug slug.
    * @param surferType the surfer types.
    */
-  public Surfer(long id, String name, String home, String awards, String carouselUrl, 
+  public Surfer(String name, String home, String awards, String carouselUrl, 
       String bioUrl, String bio, String slug, String surferType) {
-    this.setId(id);
-    this.setName(name);
-    this.setHome(home);
-    this.setAwards(awards);
-    this.setCarouselUrl(carouselUrl);
-    this.setBioUrl(bioUrl);
-    this.setBio(bio);
-    this.setSlug(slug);
-    this.setSurferType(surferType);
-  }
-
-  /**
-   * @return the id
-   */
-  public long getId() {
-    return id;
-  }
-
-  /**
-   * @param id the id to set
-   */
-  public void setId(long id) {
-    this.id = id;
+    this.name = name;
+    this.home = home;
+    this.awards = awards;
+    this.carouselUrl = carouselUrl;
+    this.bioUrl = bioUrl;
+    this.bio = bio;
+    this.slug = slug;
+    this.surferType = surferType;
   }
 
   /**
@@ -176,6 +160,22 @@ public class Surfer {
   public void setSurferType(String surferType) {
     this.surferType = surferType;
   }
+
+  /**
+   * @return the checker
+   */
+  public boolean isChecker() {
+    return checker;
+  }
+
+  /**
+   * @param checker the checker to set
+   */
+  public void setChecker(boolean checker) {
+    this.checker = checker;
+  }
+  
+  
   
   
 }

@@ -1,0 +1,27 @@
+@(surfer: Surfer, surfers: List[Surfer])
+
+@Main(surfers) {
+   <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="well">
+            <div class="surferPic" style="background:url(@surfer.getBioUrl());background-size:cover;background-position:center;"></div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="well">
+            <h1>@surfer.getName()</h1>
+            <b>Home: </b>@surfer.getHome()<br><br>
+            <b>Awards: </b>@surfer.getAwards()<br><br>
+            <b>Biography: </b>@surfer.getBio()<br><br>
+            <div id="bar">
+              <li><a href="@routes.Application.manageSurfer(surfer.getSlug())">Edit</a></li>
+            </div>
+            <div id="bar2">
+              <li><a href="@routes.Application.deleteSurfer(surfer.getSlug())">Delete</a></li>
+            </div>
+          </div>
+         </div>
+      </div>
+   </div>
+}

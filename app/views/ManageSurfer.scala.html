@@ -1,0 +1,65 @@
+@(surferForm: Form[views.formdata.SurferFormData], typeMap: Map[String, Boolean], surfers: List[Surfer], disableSlug: Boolean)
+
+@import helper._
+@import bootstrap3._
+
+@Main(surfers) {
+ <div class="container">
+  @form(routes.Application.postSurfer(), 'class -> "form-horizontal") {
+       
+  @bootstrap3.text(surferForm("name"),
+        label = "Name",
+        placeholder = "Clarrissa Moore",
+        help = "The name of the surfer.")
+        
+  @text(surferForm("home"),
+        label = "Home",
+        placeholder = "Honolulu, Hawaii",
+        help = "Where the surfer hails from.")
+        
+  @text(surferForm("awards"),
+        label = "Awards",
+        placeholder = "6 ASP Women's World Tour events, 2 ASP WQS 6-Star events and 11 NSSA Titles",
+        help = "List titles and other surfing awards.")
+        
+  @text(surferForm("carouselUrl"),
+        label = "Carousel URL",
+        placeholder = "http://example.com/carouselPicture.jpg",
+        help = "A URL to the picture to be preserved in the home page carousel for this surfer.")        
+        
+  @text(surferForm("bioUrl"),
+        label = "Bio URL",
+        placeholder = "http://example.com/bioPicture.jpg",
+        help = "A URL to the picture to be preserved in the bio page for this surfer.")
+
+  @bootstrap3.textarea(surferForm("bio"),
+        rows = "5",
+        label = "Bio",
+        placeholder = "Bio statement goes here.",
+        help = "One paragraph description of this surfer.")
+
+  @slug(surferForm("slug"),
+        label = "Slug",
+        placeholder = "tempslug",
+        help = "Letters and digits to be used to identify this surfer in URLs, i.e. http://surferpedia.com/surfer/kellyslater",
+        disable = disableSlug)
+
+
+  @hidden(surferForm("slug"))
+  
+  @hidden(surferForm("checker"))
+  
+  @bootstrap3.select(surferForm("surferType"),
+        label = "Type",
+        optionMap = typeMap,
+        isMultiple = false,
+        help = "The type of surfer for placement in the menubar.")
+      
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+    </div>          
+  } 
+ </div>
+}

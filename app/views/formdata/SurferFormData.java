@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import play.data.validation.ValidationError;
 import models.Surfer;
+import models.SurferDB;
 
 /**
  * 
@@ -12,8 +13,6 @@ import models.Surfer;
  */
 public class SurferFormData {
   
-  /** the id field. */
-  public long id;
   /** the name field. */
   public String name = "";
   /** the home field. */
@@ -30,6 +29,8 @@ public class SurferFormData {
   public String slug = "";
   /** the type field. */
   public String surferType = "";
+  /** checks if created. */
+  public boolean checker = true;
   
   /**
    * Default constructor.
@@ -66,7 +67,6 @@ public class SurferFormData {
    * @param surfer the surfer.
    */
   public SurferFormData(Surfer surfer) {
-    this.id = surfer.getId();
     this.name = surfer.getName();
     this.home = surfer.getHome();
     this.awards = surfer.getAwards();
@@ -75,7 +75,6 @@ public class SurferFormData {
     this.bio = surfer.getBio();
     this.slug = surfer.getSlug();
     this.surferType = surfer.getSurferType();
-    
   }
   
   /**
@@ -107,6 +106,14 @@ public class SurferFormData {
     
     if (slug == null || slug.length() == 0) {
       errors.add(new ValidationError("slug", "Slug is Required"));
+    }
+    
+    if (!slug.matches("^[a-zA-Z0-9]*$")) {
+      errors.add(new ValidationError("slug", "Slug must be alphanumeric."));
+    }
+    
+    if (checker && SurferDB.slugExists(slug)) {
+      errors.add(new ValidationError("slug", "Slug '" + slug + "' already in use."));
     }
 
     if (!SurferTypes.isType(surferType)) {
