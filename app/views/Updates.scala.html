@@ -1,12 +1,12 @@
-@(updates: List[Update])
+@(updates: List[Update], surfers: List[Surfer])
 
-@Main("surfers") {
+@Main(surfers) {
    <div class="container">
      <h1>Updates</h1>
      <table class="table table-stripped table-bordered">
      <tr><th>Date</th><th>Action</th><th>Surfer</th></tr>
 
-     @for(update <- updatess) {
+     @for(update <- updates) {
         <tr>
         <td>@update.getDate()</td>
         <td>@update.getAction()</td>

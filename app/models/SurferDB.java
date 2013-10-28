@@ -24,22 +24,27 @@ public class SurferDB {
   public static Surfer addSurfer(SurferFormData formData) {
     String slug = formData.slug;
     Surfer surfer =
-        new Surfer(formData.name, formData.home, formData.awards, formData.carouselUrl, formData.bioUrl,
-            formData.bio, slug, formData.surferType);
+        new Surfer(formData.name, formData.home, formData.awards, formData.carouselUrl, formData.bioUrl, formData.bio,
+            slug, formData.surferType);
     surfers.put(slug, surfer);
     return surfer;
   }
-  
+
   /**
    * Deletes a surfer.
+   * 
    * @param slug slug.
+   * @return the deleted surfer.
    */
-  public static void deleteSurfer(String slug) {
+  public static Surfer deleteSurfer(String slug) {
+    Surfer surfer = surfers.get(slug);
     surfers.remove(slug);
+    return surfer;
   }
-  
+
   /**
    * Checks if slug exists.
+   * 
    * @param slug slug.
    * @return True if exits.
    */
@@ -49,6 +54,7 @@ public class SurferDB {
 
   /**
    * Returns a list of all surfers.
+   * 
    * @return a list.
    */
   public static List<Surfer> getSurfers() {
