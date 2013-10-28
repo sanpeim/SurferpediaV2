@@ -22,4 +22,12 @@ public class UpdatesDB {
     updates.add(update);
     return update;
   }
+  
+  /**
+   * Gets a list of all updates.
+   * @return List of Updates.
+   */
+  public static List<Update> getUpdates() {
+    return updates;
+  }
 }

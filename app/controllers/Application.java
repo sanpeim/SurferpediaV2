@@ -88,4 +88,8 @@ public class Application extends Controller {
     }
     
   }
+  
+  public static Result getUpdates() {
+    return Updates.render(UpdatesDB.getUpdates());
+  }
 }
