@@ -98,7 +98,7 @@ public class Application extends Controller {
     }
     else {
       SurferFormData data = formData.get();
-      UpdatesDB
+      UpdatesDB 
           .addUpdate(new Update(createTimeStamp(), (SurferDB.slugExists(data.slug)) ? "Edit" : "Create", data.name));
       SurferDB.addSurfer(data);
       return ok(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true));
