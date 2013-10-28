@@ -1,6 +1,7 @@
 package controllers;
 
 import models.SurferDB;
+import models.UpdatesDB;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -9,6 +10,7 @@ import views.formdata.SurferTypes;
 import views.html.Index;
 import views.html.ManageSurfer;
 import views.html.ShowSurfer;
+import views.html.Updates;
 
 /**
  * Implements the controllers for this application.
@@ -89,6 +91,10 @@ public class Application extends Controller {
     
   }
   
+  /**
+   * Returns the updates page.
+   * @return The updates page.
+   */
   public static Result getUpdates() {
     return Updates.render(UpdatesDB.getUpdates());
   }
