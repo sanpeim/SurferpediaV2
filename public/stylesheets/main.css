@@ -33,7 +33,7 @@ body {
   height: 400px;
 }
 
-li {
-  display: inline;
+.pullRight{
+  display: right;
 }
 
