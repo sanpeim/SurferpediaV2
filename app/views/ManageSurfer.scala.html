@@ -1,4 +1,4 @@
-@(surferForm: Form[views.formdata.SurferFormData], typeMap: Map[String, Boolean], surfers: List[Surfer], disableSlug: Boolean)
+@(surferForm: Form[views.formdata.SurferFormData], typeMap: Map[String, Boolean], surfers: List[Surfer], disableSlug: Boolean, foot: List[String])
 
 @import helper._
 @import bootstrap3._
@@ -21,6 +21,11 @@
         label = "Awards",
         placeholder = "6 ASP Women's World Tour events, 2 ASP WQS 6-Star events and 11 NSSA Titles",
         help = "List titles and other surfing awards.")
+        
+  @radiobuttons(surferForm("footType"),
+        label = "Foot Style",
+        buttonNameList = foot,
+        help = "Select this surfer's foot style")
         
   @text(surferForm("carouselUrl"),
         label = "Carousel URL",

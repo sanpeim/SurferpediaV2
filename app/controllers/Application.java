@@ -1,9 +1,11 @@
 package controllers;
 
+import java.util.List;
 import models.SurferDB;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.formdata.FootstyleTypes;
 import views.formdata.SurferFormData;
 import views.formdata.SurferTypes;
 import views.html.Index;
@@ -30,7 +32,8 @@ public class Application extends Controller {
   public static Result newSurfer() {
     SurferFormData data = new SurferFormData();
     Form<SurferFormData> formData = Form.form(SurferFormData.class).fill(data);
-    return ok(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), false));
+    List<String> foot = FootstyleTypes.getTypes(data.footType);
+    return ok(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), false, foot));
     
   }
   
@@ -64,7 +67,8 @@ public class Application extends Controller {
     SurferFormData data = new SurferFormData(SurferDB.getSurfer(slug));
     data.checker = false;
     Form<SurferFormData> formData = Form.form(SurferFormData.class).fill(data);
-    return ok(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true));
+    List<String> foot = FootstyleTypes.getTypes(data.footType);
+    return ok(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true, foot));
   }
   
   /**
@@ -75,15 +79,16 @@ public class Application extends Controller {
     Form<SurferFormData> formData = Form.form(SurferFormData.class).bindFromRequest();
     
     if (formData.hasErrors() && formData.errors().containsKey("slug")) {
-      return badRequest(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), false));
+      return badRequest(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), false, null));
     }
     else if (formData.hasErrors()) {
-      return badRequest(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true));
+      return badRequest(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true, null));
     }
     else {
       SurferFormData data = formData.get();
       SurferDB.addSurfer(data);
-      return ok(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true));
+      List<String> foot = FootstyleTypes.getTypes(data.footType);
+      return ok(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true, foot));
     }
     
   }

@@ -25,6 +25,8 @@ public class Surfer {
   private String surferType;
   /** checks if created. */
   private boolean checker = true;
+  /** the foot style type field. */
+  private String footType;
   
   /**
    * Creates a surfer.
@@ -38,7 +40,7 @@ public class Surfer {
    * @param surferType the surfer types.
    */
   public Surfer(String name, String home, String awards, String carouselUrl, 
-      String bioUrl, String bio, String slug, String surferType) {
+      String bioUrl, String bio, String slug, String surferType, String footType) {
     this.name = name;
     this.home = home;
     this.awards = awards;
@@ -47,6 +49,7 @@ public class Surfer {
     this.bio = bio;
     this.slug = slug;
     this.surferType = surferType;
+    this.footType = footType;
   }
 
   /**
@@ -173,6 +176,20 @@ public class Surfer {
    */
   public void setChecker(boolean checker) {
     this.checker = checker;
+  }
+
+  /**
+   * @return the footType
+   */
+  public String getFootType() {
+    return footType;
+  }
+
+  /**
+   * @param footType the footType to set
+   */
+  public void setFootType(String footType) {
+    this.footType = footType;
   }
   
   

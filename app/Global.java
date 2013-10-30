@@ -33,7 +33,8 @@ public class Global extends GlobalSettings {
         + "But you would be wrong. If it was life or death, and I had to choose skating or surfing, "
         + "I would choose death, he says.",
         "kalanidavid",
-        "Male"));
+        "Male",
+        "Regular"));
     
     SurferDB.addSurfer(new SurferFormData(
         "Clarissa Moore",
@@ -46,7 +47,8 @@ public class Global extends GlobalSettings {
         + "Moore learned how to surf from her father. She has a younger sister Cayla.  "
         + "Carissa graduated from Punahou School in 2010.",
         "clarissamoore",
-        "Female"));
+        "Female",
+        "Regular"));
     
     SurferDB.addSurfer(new SurferFormData(
         "Jake Marshall",
@@ -63,6 +65,7 @@ public class Global extends GlobalSettings {
         + "at Lower Trestles. But while surf stardom seems inevitable for Jake, he's still just a kid, "
         + "and knows where his priorities should be. ",
         "jakemarshall",
-        "Grom"));
+        "Grom",
+        "Goofy"));
   }
 }

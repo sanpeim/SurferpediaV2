@@ -31,6 +31,8 @@ public class SurferFormData {
   public String surferType = "";
   /** checks if created. */
   public boolean checker = true;
+  /** the foot style type field. */
+  public String footType = "";
   
   /**
    * Default constructor.
@@ -51,7 +53,7 @@ public class SurferFormData {
    * @param surferType the surfer types.
    */
   public SurferFormData(String name, String home, String awards, String carouselUrl, 
-                        String bioUrl, String bio, String slug, String surferType) {
+                        String bioUrl, String bio, String slug, String surferType, String footType) {
     this.name = name;
     this.home = home;
     this.awards = awards;
@@ -60,6 +62,7 @@ public class SurferFormData {
     this.bio = bio;
     this.slug = slug;
     this.surferType = surferType;
+    this.footType = footType;
   }
 
   /**
@@ -75,6 +78,7 @@ public class SurferFormData {
     this.bio = surfer.getBio();
     this.slug = surfer.getSlug();
     this.surferType = surfer.getSurferType();
+    this.footType = surfer.getFootType();
   }
   
   /**
