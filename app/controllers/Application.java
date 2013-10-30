@@ -74,7 +74,6 @@ public class Application extends Controller {
   public static Result postSurfer() {
     Form<SurferFormData> formData = Form.form(SurferFormData.class).bindFromRequest();
     
-    //Unlocks the slug field if there is a slug related error, otherwise keep it locked
     if (formData.hasErrors() && formData.errors().containsKey("slug")) {
       return badRequest(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), false));
     }
