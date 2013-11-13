@@ -61,8 +61,10 @@ public class Application extends Controller {
    */
   @Security.Authenticated(Secured.class)
   public static Result deleteSurfer(String slug) {
+    UserInfo userInfo = UserInfoDB.getUser(request().username());
+    Boolean isLoggedIn = userInfo != null;
     SurferDB.deleteSurfer(slug);
-    return ok(Index.render(SurferDB.getSurfers()));
+    return ok(Index.render("Index", isLoggedIn, userInfo,SurferDB.getSurfers()));
     
   }
   
