@@ -15,7 +15,7 @@ public class Global extends GlobalSettings {
   *@param app the application.
   */
   public void onStart(Application app) {
-    
+     
     SurferDB.addSurfer(new SurferFormData(
         "Kalani David",
         "North Shore, Hawaii",
