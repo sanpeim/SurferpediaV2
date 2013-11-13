@@ -64,7 +64,20 @@
             }
             </ul>
           </li>
-          <li><a href="@routes.Application.newSurfer()">New</a></li>
+          @if(isLoggedIn){
+        <ul class="nav navbar-nav">
+          <li><a href="@routes.Application.newSurfer()">New</a></li></li>
+        </ul>
+        <ul class="nav navbar-nav">
+            <li>,<p class="navbar-text">@userInfo.getEmail()</p></li>
+            <a href="@routes.Application.logout()">Logout</a></li>
+        </ul>
+        } else {
+        <ul class ="nav navbar-nav navbar-right">
+            <a href="@routes.Application.login()">Login</a></li>
+        </ul>
+        }
+          
           </ul>
       </div>
     </div>

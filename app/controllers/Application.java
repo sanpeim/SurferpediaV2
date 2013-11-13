@@ -1,6 +1,8 @@
 package controllers;
 
 import models.SurferDB;
+import models.UserInfo;
+import models.UserInfoDB;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -23,17 +25,22 @@ public class Application extends Controller {
    * @return The resulting home page. 
    */
   public static Result index() {
-    return ok(Index.render(SurferDB.getSurfers()));
+    UserInfo userInfo = UserInfoDB.getUser(request().username());
+    Boolean isLoggedIn = userInfo != null;
+    return ok(Index.render("Index", isLoggedIn, userInfo, SurferDB.getSurfers()));
   }
   
   /**
    * Returns the manage surfer page.
    * @return The manage surfer page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result newSurfer() {
+    UserInfo userInfo = UserInfoDB.getUser(request().username());
+    Boolean isLoggedIn = userInfo != null;
     SurferFormData data = new SurferFormData();
     Form<SurferFormData> formData = Form.form(SurferFormData.class).fill(data);
-    return ok(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), false, null));
+    return ok(ManageSurfer.render("Add", isLoggedIn, userInfo, formData, SurferTypes.getTypes(), SurferDB.getSurfers(), false, null));
     
   }
   
@@ -52,6 +59,7 @@ public class Application extends Controller {
    * @param slug The slug used to retrieve the surfer.
    * @return The indexed surfer page.
    */
+  @Security.Authenticated(Secured.class)
   public static Result deleteSurfer(String slug) {
     SurferDB.deleteSurfer(slug);
     return ok(Index.render(SurferDB.getSurfers()));
@@ -64,10 +72,12 @@ public class Application extends Controller {
    * @return The manage surfer page.
    */
   public static Result manageSurfer(String slug) {
+    UserInfo userInfo = UserInfoDB.getUser(request().username());
+    Boolean isLoggedIn = userInfo != null;
     SurferFormData data = new SurferFormData(SurferDB.getSurfer(slug));
     data.checker = false;
     Form<SurferFormData> formData = Form.form(SurferFormData.class).fill(data);
-    return ok(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true, null));
+    return ok(ManageSurfer.render("New", isLoggedIn, userInfo, formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true, null));
   }
   
   /**
@@ -75,19 +85,21 @@ public class Application extends Controller {
    * @return The manage surfer page.
    */
   public static Result postSurfer() {
+    UserInfo userInfo = UserInfoDB.getUser(request().username());
+    Boolean isLoggedIn = userInfo != null;
     Form<SurferFormData> formData = Form.form(SurferFormData.class).bindFromRequest();
     
     //Unlocks the slug field if there is a slug related error, otherwise keep it locked
     if (formData.hasErrors() && formData.errors().containsKey("slug")) {
-      return badRequest(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), false, null));
+      return badRequest(ManageSurfer.render("New", isLoggedIn, userInfo, formData, SurferTypes.getTypes(), SurferDB.getSurfers(), false, null));
     }
     else if (formData.hasErrors()) {
-      return badRequest(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true, null));
+      return badRequest(ManageSurfer.render("New", isLoggedIn, userInfo, formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true, null));
     }
     else {
       SurferFormData data = formData.get();
       SurferDB.addSurfer(data);
-      return ok(ManageSurfer.render(formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true, null));
+      return ok(ManageSurfer.render("New", isLoggedIn, userInfo, formData, SurferTypes.getTypes(), SurferDB.getSurfers(), true, null));
     }
   }
   
@@ -108,6 +120,7 @@ public class Application extends Controller {
    * If errors not found, render the page with the good data. 
    * @return The index page with the results of validation. 
    */
+  
   public static Result postLogin() {
 
     // Get the submitted form data from the request object, and run validation.
